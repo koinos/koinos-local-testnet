@@ -1,0 +1,7 @@
+open wallets/pob.wallet pob
+rclimit 100%
+
+session begin
+upload wasm/pob.wasm abi/pob.abi
+session view
+session submit

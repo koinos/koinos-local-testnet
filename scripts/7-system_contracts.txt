@@ -1,0 +1,13 @@
+open wallets/genesis.wallet genesis
+
+rclimit 10%
+
+session begin
+set_system_contract 17MjUXDCuTX1p9Kyqy48SQkkPfKScoggo true
+set_system_contract 1FaSvLjQJsCJKq5ybmGsMMQs8RQYyVv8ju true
+set_system_contract 1MAbK5pYkhp9yHnfhYamC3tfSLmVRTDjd9 true
+set_system_contract 16X6cKyqiT8EzPEksRJxXcqMnHMMm9Vxct true
+set_system_contract 17n12ktwN79sR6ia9DDgCfmw77EgpbTyBi true
+set_system_contract 13NQnca5chwpKm4ebHbvgvJmXrsSCTayDJ true
+session view
+session submit

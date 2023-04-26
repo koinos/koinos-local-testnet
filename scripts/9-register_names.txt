@@ -1,0 +1,13 @@
+open wallets/genesis.wallet genesis
+register name_service 13NQnca5chwpKm4ebHbvgvJmXrsSCTayDJ
+
+rclimit 20%
+
+session begin
+name_service.set_record governance 17MjUXDCuTX1p9Kyqy48SQkkPfKScoggo
+name_service.set_record koin 1FaSvLjQJsCJKq5ybmGsMMQs8RQYyVv8ju
+name_service.set_record pob 1MAbK5pYkhp9yHnfhYamC3tfSLmVRTDjd9
+name_service.set_record resources 16X6cKyqiT8EzPEksRJxXcqMnHMMm9Vxct
+name_service.set_record vhp 17n12ktwN79sR6ia9DDgCfmw77EgpbTyBi
+session view
+session submit

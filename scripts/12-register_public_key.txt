@@ -1,0 +1,9 @@
+open wallets/genesis.wallet genesis
+register pob 1MAbK5pYkhp9yHnfhYamC3tfSLmVRTDjd9
+
+rclimit 10%
+
+session begin
+pob.register_public_key 147ABaHVxtpoSpfpZ8yry7eaFAjV87trGR A1s5ezQRqj57zQZCED5H6jqM7aHbO-nXkBTe-Fc6XA_f
+session view
+session submit

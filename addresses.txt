@@ -1,0 +1,8 @@
+governance:17MjUXDCuTX1p9Kyqy48SQkkPfKScoggo
+koin:1FaSvLjQJsCJKq5ybmGsMMQs8RQYyVv8ju
+pob:1MAbK5pYkhp9yHnfhYamC3tfSLmVRTDjd9
+resources:16X6cKyqiT8EzPEksRJxXcqMnHMMm9Vxct
+vhp:17n12ktwN79sR6ia9DDgCfmw77EgpbTyBi
+name_service:13NQnca5chwpKm4ebHbvgvJmXrsSCTayDJ
+user:1NRz4i4UhVJ5MMeNwDTwTY95ZygtpuPwPU
+

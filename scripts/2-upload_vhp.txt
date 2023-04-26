@@ -1,0 +1,7 @@
+open wallets/vhp.wallet vhp
+rclimit 100%
+
+session begin
+upload wasm/vhp.wasm abi/vhp.abi
+session view
+session submit

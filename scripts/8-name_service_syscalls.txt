@@ -1,0 +1,10 @@
+open wallets/genesis.wallet genesis
+register name_service 13NQnca5chwpKm4ebHbvgvJmXrsSCTayDJ
+
+rclimit 10%
+
+session begin
+set_system_call get_contract_name 13NQnca5chwpKm4ebHbvgvJmXrsSCTayDJ 0xe5070a16
+set_system_call get_contract_address 13NQnca5chwpKm4ebHbvgvJmXrsSCTayDJ 0xa61ae5e8
+session view
+session submit

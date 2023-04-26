@@ -1,0 +1,9 @@
+open wallets/koin.wallet koin
+register koin 1FaSvLjQJsCJKq5ybmGsMMQs8RQYyVv8ju
+
+rclimit 20%
+
+session begin
+koin.mint 147ABaHVxtpoSpfpZ8yry7eaFAjV87trGR 100000000000000
+session view
+session submit

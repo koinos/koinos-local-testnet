@@ -1,0 +1,7 @@
+open wallets/koin.wallet koin
+rclimit 80%
+
+session begin
+upload wasm/koin.wasm abi/koin.abi
+session view
+session submit

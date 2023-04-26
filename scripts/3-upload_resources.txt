@@ -1,0 +1,7 @@
+open wallets/resources.wallet resources
+rclimit 100%
+
+session begin
+upload wasm/resources.wasm abi/resources.abi
+session view
+session submit

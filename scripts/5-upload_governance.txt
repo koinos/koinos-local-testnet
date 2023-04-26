@@ -1,0 +1,7 @@
+open wallets/governance.wallet governance
+rclimit 100%
+
+session begin
+upload wasm/governance.wasm abi/governance.abi
+session view
+session submit

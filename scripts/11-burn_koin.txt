@@ -1,0 +1,9 @@
+open wallets/genesis.wallet genesis
+register pob 1MAbK5pYkhp9yHnfhYamC3tfSLmVRTDjd9
+
+rclimit 10%
+
+session begin
+pob.burn 50000000000000 147ABaHVxtpoSpfpZ8yry7eaFAjV87trGR 147ABaHVxtpoSpfpZ8yry7eaFAjV87trGR
+session view
+session submit
