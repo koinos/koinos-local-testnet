@@ -1,5 +1,9 @@
 # Koinos local testnet
 
+## Prerequisites
+
+- Ensure that `koinos-cli` is on your path
+
 ## Instructions
 
 1. Copy the `config/` directory to your `koinos/koinos` directory
