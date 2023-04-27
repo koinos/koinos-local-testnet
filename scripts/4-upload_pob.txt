@@ -2,6 +2,6 @@ open wallets/pob.wallet pob
 rclimit 100%
 
 session begin
-upload wasm/pob.wasm abi/pob.abi
+upload wasm/pob.wasm abi/pob.abi false false true
 session view
 session submit

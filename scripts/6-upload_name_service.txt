@@ -2,6 +2,6 @@ open wallets/name_service.wallet name_service
 rclimit 100%
 
 session begin
-upload wasm/name_service.wasm abi/name_service.abi
+upload wasm/name_service.wasm abi/name_service.abi false false true
 session view
 session submit
