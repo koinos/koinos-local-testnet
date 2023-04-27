@@ -1,0 +1,8 @@
+open wallets/genesis.wallet genesis
+rclimit 10%
+
+session begin
+register_token koin 1FaSvLjQJsCJKq5ybmGsMMQs8RQYyVv8ju
+koin.transfer 1Ak89pu1mGfha5EJgnMj2wa9EJRABurgwE 1000000
+session view
+session submit

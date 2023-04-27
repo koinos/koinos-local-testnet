@@ -1,0 +1,6 @@
+open upgrade/wallets/vhp.wallet vhp
+
+session begin
+upload upgrade/wasm/vhp.wasm upgrade/abi/vhp.abi
+session view
+session submit
