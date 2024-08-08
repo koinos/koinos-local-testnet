@@ -9,5 +9,7 @@ name_service.set_record koin 1FaSvLjQJsCJKq5ybmGsMMQs8RQYyVv8ju
 name_service.set_record pob 1MAbK5pYkhp9yHnfhYamC3tfSLmVRTDjd9
 name_service.set_record resources 16X6cKyqiT8EzPEksRJxXcqMnHMMm9Vxct
 name_service.set_record vhp 17n12ktwN79sR6ia9DDgCfmw77EgpbTyBi
+name_service.set_record name_service 13NQnca5chwpKm4ebHbvgvJmXrsSCTayDJ
+name_service.set_record get_contract_metadata 1GERisQC8e4bcsHmgU1mVGUJCwCJ3ioz7C
 session view
 session submit

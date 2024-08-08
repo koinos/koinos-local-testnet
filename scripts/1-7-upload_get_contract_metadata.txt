@@ -1,0 +1,7 @@
+open wallets/get_contract_metadata.wallet get_contract_metadata
+rclimit 100%
+
+session begin
+upload wasm/get_contract_metadata.wasm abi/get_contract_metadata.abi false false true
+session view
+session submit

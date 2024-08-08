@@ -1,6 +1,6 @@
 open wallets/genesis.wallet genesis
 
-rclimit 40%
+rclimit 25%
 
 session begin
 set_system_call pre_block_callback 17MjUXDCuTX1p9Kyqy48SQkkPfKScoggo 0x531d5d4e
