@@ -1,0 +1,7 @@
+open upgrade/wallets/koin_wrapper.wallet koin_wrapper
+rclimit 100%
+
+session begin
+upload upgrade/wasm/koin_wrapper.wasm upgrade/abi/koin_wrapper.abi
+session view
+session submit

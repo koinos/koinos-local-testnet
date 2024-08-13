@@ -8,11 +8,12 @@ Uploading new contracts...
 
 EOF
 koinos-cli -f upgrade/scripts/1-fund.txt
-sleep $SLEEP_TIME
+sleep 15
 koinos-cli -f upgrade/scripts/2-1-upload_koin.txt
-sleep $SLEEP_TIME
 koinos-cli -f upgrade/scripts/2-2-upload_vhp.txt
-sleep $SLEEP_TIME
+koinos-cli -f upgrade/scripts/2-3-upload_koin_wrapper.txt
+koinos-cli -f upgrade/scripts/2-4-upload_mock_smart_wallet.txt
+sleep 15
 
 cat << EOF
 ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
@@ -22,4 +23,3 @@ cat << EOF
 ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 EOF
 koinos-cli -f upgrade/scripts/3-submit_proposal.txt
-sleep $SLEEP_TIME

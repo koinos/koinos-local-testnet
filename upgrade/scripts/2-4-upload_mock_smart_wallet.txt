@@ -1,0 +1,7 @@
+open upgrade/wallets/mock_smart_wallet.wallet mock_smart_wallet
+rclimit 100%
+
+session begin
+upload upgrade/wasm/mock_smart_wallet.wasm upgrade/abi/mock_smart_wallet.abi true false false
+session view
+session submit

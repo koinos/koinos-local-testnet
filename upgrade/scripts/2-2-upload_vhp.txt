@@ -2,6 +2,6 @@ open upgrade/wallets/vhp_kcs4.wallet vhp_kcs4
 rclimit 100%
 
 session begin
-upload upgrade/wasm/vhp_kcs4.wasm upgrade/abi/vhp_kcs4.abi
+upload upgrade/wasm/vhp_kcs4.wasm upgrade/abi/vhp_kcs4.abi true true true
 session view
 session submit
