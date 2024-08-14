@@ -10,17 +10,19 @@ cat << EOF
 ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 
 EOF
-koinos-cli -f scripts/1-upload_koin.txt
+koinos-cli -f scripts/1-1-upload_koin.txt
 sleep $SLEEP_TIME
-koinos-cli -f scripts/2-upload_vhp.txt
+koinos-cli -f scripts/1-2-upload_vhp.txt
 sleep $SLEEP_TIME
-koinos-cli -f scripts/3-upload_resources.txt
+koinos-cli -f scripts/1-3-upload_resources.txt
 sleep $SLEEP_TIME
-koinos-cli -f scripts/4-upload_pob.txt
+koinos-cli -f scripts/1-4-upload_pob.txt
 sleep $SLEEP_TIME
-koinos-cli -f scripts/5-upload_governance.txt
+koinos-cli -f scripts/1-5-upload_governance.txt
 sleep $SLEEP_TIME
-koinos-cli -f scripts/6-upload_name_service.txt
+koinos-cli -f scripts/1-6-upload_name_service.txt
+sleep $SLEEP_TIME
+koinos-cli -f scripts/1-7-upload_get_contract_metadata.txt
 sleep $SLEEP_TIME
 
 cat << EOF
@@ -30,7 +32,7 @@ cat << EOF
 ██░████▄█▄▄██▄▄██▄███▄██▄▄███▄██▄▄▄█▄██▄█▄▄▄▄███▄▄▄█▀▀▀▄█▄▄▄██▄██▄▄▄█▄███▄████▄███▄▄██▄██▄██▄██▄█▄▄█▄██▄██▄███▄██▄▄▄
 ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 EOF
-koinos-cli -f scripts/7-system_contracts.txt
+koinos-cli -f scripts/2-system_contracts.txt
 sleep $SLEEP_TIME
 
 cat << EOF
@@ -40,7 +42,7 @@ cat << EOF
 ██░██▄░█▄██▄█▄███▄█▄▄▄███▄▄▄█▄▄▄█▄█▄▄███▄███▄▄▄██▄██▄▄▄███▄▄▄█▀▀▀▄█▄▄▄██▄██▄██▄█▄▄█▄▄█▄▄▄
 ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 EOF
-koinos-cli -f scripts/8-name_service_syscalls.txt
+koinos-cli -f scripts/3-name_service_syscalls.txt
 sleep $SLEEP_TIME
 
 cat << EOF
@@ -51,7 +53,7 @@ cat << EOF
 ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 
 EOF
-koinos-cli -f scripts/9-register_names.txt
+koinos-cli -f scripts/4-register_names.txt
 sleep $SLEEP_TIME
 
 cat << EOF
@@ -62,9 +64,9 @@ cat << EOF
 ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 
 EOF
-koinos-cli -f scripts/10-mint_koin.txt
+koinos-cli -f scripts/5-mint_koin.txt
 sleep $SLEEP_TIME
-koinos-cli -f scripts/11-burn_koin.txt
+koinos-cli -f scripts/6-burn_koin.txt
 sleep $SLEEP_TIME
 
 cat << EOF
@@ -74,7 +76,7 @@ cat << EOF
 █▄█▄▄█▄▄▄█▄▄▄▄█▄▄▄█▄▄▄██▄██▄▄▄█▄█▄▄█▄▄▄█▄██▄█▄▄▄▄███░█████▄▄▄█▄▄▄▄█▄▄█▄▄▄██▄████▄█▄█▄▄▄█▀▀▀▄
 ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 EOF
-koinos-cli -f scripts/12-register_public_key.txt
+koinos-cli -f scripts/7-register_public_key.txt
 
 cat << EOF
 ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
@@ -92,7 +94,7 @@ cat << EOF
 ██▄▄████▄███▄▄▄█▄█▄▄█▄█▄▄█▄▄▄█▄▄██▄▄▄█▄██▄█▄▄▄▄███▄▄▄█▀▀▀▄█▄▄▄██▄██▄▄▄█▄███▄████▄██▄██▄█▄▄█▄▄█▄▄▄
 ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 EOF
-koinos-cli -f scripts/13-override_syscalls.txt
+koinos-cli -f scripts/8-override_syscalls.txt
 sleep $SLEEP_TIME
 
 cat << EOF
