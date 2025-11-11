@@ -1,0 +1,24 @@
+{
+  "name": "koinos-local-testnet",
+  "version": "1.0.0",
+  "description": "scripts to setup a koinos blockchain",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/koinos/koinos-local-testnet.git"
+  },
+  "author": "Julian Gonzalez",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/koinos/koinos-local-testnet/issues"
+  },
+  "homepage": "https://github.com/koinos/koinos-local-testnet#readme",
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "koilib": "^9.1.0"
+  }
+}
