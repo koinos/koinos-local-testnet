@@ -32,6 +32,9 @@ getContractMetadataSigner.provider = provider;
 const fundSigner = Signer.fromWif(process.env.FUND_PRIVATE_KEY);
 fundSigner.provider = provider;
 
+const freemanasharerSigner = Signer.fromWif(process.env.FREEMANASHARER_PRIVATE_KEY);
+freemanasharerSigner.provider = provider;
+
 export const wallets = {
   genesis: genesisSigner,
   koin: koinSigner,
@@ -42,5 +45,6 @@ export const wallets = {
   getContractMetadata: getContractMetadataSigner,
   governance: governanceSigner,
   fund: fundSigner,
+  freemanasharer: freemanasharerSigner,
 }
 
