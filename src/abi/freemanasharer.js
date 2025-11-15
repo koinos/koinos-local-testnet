@@ -200,14 +200,14 @@ export const abiFreemanasharer = {
               "btype"
             ]
           },
-          "btype": {
+          /* "btype": {
             "type": "bytes_type",
             "id": 50000,
             "extend": "google.protobuf.FieldOptions",
             "options": {
               "proto3_optional": true
             }
-          }
+          } */
         }
       },
       "token": {
