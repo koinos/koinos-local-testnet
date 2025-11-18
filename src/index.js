@@ -4,13 +4,6 @@ import { contracts } from "./contracts.js";
 import { Transaction, utils, Signer } from "koilib";
 
 async function deployContracts() {
-  const deployOptions = {
-    authorizesCallContract: true,
-    authorizesTransactionApplication: true,
-    authorizesUploadContract: true,
-    rcLimit: 3e6,
-  };
-
   // Upload all contracts
   for (const name of Object.keys(contracts)) {
     console.log(`Uploading ${name} contract...`);
@@ -18,13 +11,11 @@ async function deployContracts() {
     if (!contract.bytecode) {
       throw new Error(`${name} contract has no bytecode`);
     }
-    const { receipt } = await contract.deploy({
-      ...deployOptions,
-      broadcast: false,
-    });
     const deploy = await contract.deploy({
-      ...deployOptions,
-      rcLimit: Math.ceil(Number(receipt.rc_limit)*1.2),
+      authorizesCallContract: true,
+      authorizesTransactionApplication: true,
+      authorizesUploadContract: true,
+      rcLimit: 3e6,
     });
     await deploy.transaction.wait();
     console.log(`${name} contract uploaded successfully\n`);
@@ -46,7 +37,6 @@ async function setSystemContracts() {
   const transaction = new Transaction({
     signer: wallets.genesis,
     provider: wallets.genesis.provider,
-    options: txOptions,
   });
   const randomPrivateKey = crypto.randomBytes(32).toString("hex");
   const signer = new Signer({ privateKey: randomPrivateKey });
@@ -90,15 +80,14 @@ async function setSystemContracts() {
     },
   });
 
+  const payer = wallets.random();
   await transaction.prepare({
     rcLimit: 2e6,
+    payer: payer.address,
   });
   await transaction.sign();
-  signer.signTransaction(transaction.transaction);
-  const receipt = await transaction.send({ broadcast: false});
-  await transaction.send({
-    rcLimit: Math.ceil(Number(receipt.rc_limit)*1.2),
-  });
+  await payer.signTransaction(transaction.transaction);
+  await transaction.send();
   await transaction.wait();
   console.log("System contracts and syscalls set successfully\n");
 }
@@ -107,7 +96,6 @@ async function setNameServiceRecords() {
   const transaction = new Transaction({
     signer: wallets.genesis,
     provider: wallets.genesis.provider,
-    options: txOptions,
   });
 
   for (const contractName of Object.keys(contracts)) {
@@ -129,14 +117,15 @@ async function setNameServiceRecords() {
       address: contracts[contractName].getId(),
     });
   }
+
+  const payer = wallets.random();
   await transaction.prepare({
     rcLimit: 3e6,
+    payer: payer.address
   });
   await transaction.sign();
-  const receipt = await transaction.send({ broadcast: false});
-  await transaction.send({
-    rcLimit: Math.ceil(Number(receipt.rc_limit)*1.2),
-  });
+  await payer.signTransaction(transaction.transaction);
+  await transaction.send();
   await transaction.wait();
   console.log("name service records set successfully\n");
 }
@@ -146,19 +135,20 @@ async function setupFundContract() {
   const transaction = new Transaction({
     signer: wallets.genesis,
     provider: wallets.genesis.provider,
-    options: txOptions,
   });
   
   await transaction.pushOperation(contracts.fund.functions.set_global_vars, {
     fee_denominator: 10000,
   });
   
-  await transaction.prepare();
-  await transaction.sign();
-  const receipt = await transaction.send({ broadcast: false});
-  await transaction.send({
-    rcLimit: Math.ceil(Number(receipt.rc_limit)*1.2),
+  const payer = wallets.random();
+  await transaction.prepare({
+    rcLimit: 3e6,
+    payer: payer.address,
   });
+  await transaction.sign();
+  await payer.signTransaction(transaction.transaction);
+  await transaction.send();
   await transaction.wait();
   console.log("Fund contract setup successfully\n");
 }
@@ -168,7 +158,6 @@ async function mintBurnKoin() {
   const transaction = new Transaction({
     signer: wallets.genesis,
     provider: wallets.genesis.provider,
-    options: txOptions,
   });
   
   await transaction.pushOperation(contracts.koin.functions.mint, {
@@ -195,14 +184,13 @@ async function mintBurnKoin() {
     token_amount: "500000000000000",
   });
 
+  const payer = wallets.random();
   await transaction.prepare({
     rcLimit: 3e6,
   });
   await transaction.sign();
-  const receipt = await transaction.send({ broadcast: false});
-  await transaction.send({
-    rcLimit: Math.ceil(Number(receipt.rc_limit)*1.2),
-  });
+  await payer.signTransaction(transaction.transaction);
+  await transaction.send();
   await transaction.wait();
   console.log("10 million koin minted for genesis account");
   console.log("100k koin minted for freemanasharer account");
@@ -214,7 +202,6 @@ async function registerPublicKey() {
   const transaction = new Transaction({
     signer: wallets.genesis,
     provider: wallets.genesis.provider,
-    options: txOptions,
   });
 
   await transaction.pushOperation(contracts.pob.functions.register_public_key, {
@@ -222,12 +209,14 @@ async function registerPublicKey() {
     public_key: utils.encodeBase64url(wallets.genesis.publicKey),
   }); 
 
-  await transaction.prepare();
-  await transaction.sign();
-  const receipt = await transaction.send({ broadcast: false});
-  await transaction.send({
-    rcLimit: Math.ceil(Number(receipt.rc_limit)*1.2),
+  const payer = wallets.random();
+  await transaction.prepare({
+    rcLimit: 3e6,
+    payer: payer.address,
   });
+  await transaction.sign();
+  await payer.signTransaction(transaction.transaction);
+  await transaction.send();
   await transaction.wait();
 
   console.log("Genesis public key registered successfully\n");
@@ -250,7 +239,6 @@ async function overrideSystemCalls() {
   const transaction = new Transaction({
     signer: wallets.genesis,
     provider: wallets.genesis.provider,
-    options: txOptions,
   });
   
   // override pre_block_callback syscall
@@ -373,37 +361,26 @@ async function overrideSystemCalls() {
     },
   });
 
+  const payer = wallets.random();
   await transaction.prepare({
     rcLimit: 3e6,
+    payer: payer.address,
   });
   await transaction.sign();
-  const receipt = await transaction.send({ broadcast: false});
-  await transaction.send({
-    rcLimit: Math.ceil(Number(receipt.rc_limit)*1.2),
-  });
+  await payer.signTransaction(transaction.transaction);
+  await transaction.send();
   await transaction.wait();
   console.log("System calls overridden successfully");
 }
 
-async function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
-
 async function main() {
-  const ms = 30;
   await deployContracts();
-  await sleep(ms);
   await setSystemContracts();
-  await sleep(ms);
   await setNameServiceRecords();
-  await sleep(ms);
   await setupFundContract();
-  await sleep(ms);
   await mintBurnKoin();
-  await sleep(ms);
   const blockHeight = await registerPublicKey();
   await waitUntilBlockHeight(blockHeight + 20);
-  await sleep(ms);
   await overrideSystemCalls();
 
   console.log("Bootstrap complete");

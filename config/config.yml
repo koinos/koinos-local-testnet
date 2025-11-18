@@ -6,7 +6,7 @@ global:
   blacklist:                                          # RPC targets to blacklist, can be an entire microservice (i.e. chain), or specific API calls
     - block_store.add_block
   # jobs: 32                                          # Number of jobs to run
-  reset: true                                       # DANGEROUS: Resets the entire node. To reset a single microservice, set this in the microservice config
+  # reset: true                                       # DANGEROUS: Resets the entire node. To reset a single microservice, set this in the microservice config
   # whitelist:                                        # RPC targets to whitelist
   # - RPC
 
