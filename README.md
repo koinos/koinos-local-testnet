@@ -14,3 +14,19 @@
 6. When the cluster has started producing blocks, execute `yarn bootstrap`
 7. After the script completes, you can change the block producer to run `pob` algorithm by modifying `config/config.yml`
 
+## Exposing the RPC Node
+
+If you want to expose the RPC node, you can use the `nginx.conf` file. To enable this, you need to manually add the `cors-proxy` service to your `docker-compose.yml` file in the `koinos/koinos` directory. Add the following service block to the `services` section:
+
+```yaml
+   cors-proxy:
+      image: nginx:alpine
+      restart: always
+      ports:
+         - "80:80"
+      volumes:
+         - ~/koinos-local-testnet/nginx.conf:/etc/nginx/nginx.conf
+```
+
+The nginx proxy will expose the RPC endpoints on port 80 with CORS headers enabled, allowing you to access the JSON-RPC API, REST API, and gRPC endpoints from external applications.
+
