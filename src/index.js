@@ -224,13 +224,16 @@ async function registerPublicKey() {
   return headInfo.head_topology.height;
 }
 
-async function waitUntilBlockHeight(blockHeight) {
-  console.log(`Waiting 20 blocks to activate the public key for block production...`);
+async function waitPublicKeyPeriod() {
   const provider = wallets.genesis.provider;
-  let headInfo = await provider.getHeadInfo();
-  while (headInfo.head_topology.height < blockHeight) {
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    headInfo = await provider.getHeadInfo();
+  const headInfo = await provider.getHeadInfo();
+  let blockHeight = Number(headInfo.head_topology.height);
+  const targetBlockHeight = blockHeight + 20;
+  while (blockHeight < targetBlockHeight) {
+    console.log(`Waiting ${targetBlockHeight - blockHeight} blocks to activate the public key for block production...`);
+    await new Promise(resolve => setTimeout(resolve, 3000));
+    const headInfo = await provider.getHeadInfo();
+    blockHeight = Number(headInfo.head_topology.height);
   }
   console.log("Public key activated for block production\n");
 }
@@ -379,8 +382,8 @@ async function main() {
   await setNameServiceRecords();
   await setupFundContract();
   await mintBurnKoin();
-  const blockHeight = await registerPublicKey();
-  await waitUntilBlockHeight(blockHeight + 20);
+  await registerPublicKey();
+  await waitPublicKeyPeriod();
   await overrideSystemCalls();
 
   console.log("Bootstrap complete");

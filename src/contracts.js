@@ -13,6 +13,15 @@ delete utils.tokenAbi.koilib_types.nested.koinos.nested.btype;
 const currentDir = path.dirname(new URL(import.meta.url).pathname);
 const wasmDir = path.join(currentDir, "wasm");
 
+const abiVhp = JSON.parse(JSON.stringify(utils.tokenAbi));
+abiVhp.methods.effective_balance_of = {
+  argument: "token.balance_of_args",
+  return: "token.uint64",
+  description: "Get effective balance of an account",
+  read_only: true,
+  entry_point: 0x629f31e6,
+};
+
 const koinContract = new Contract({
   id: wallets.koin.address,
   abi: utils.tokenAbi,
@@ -23,7 +32,7 @@ const koinContract = new Contract({
 
 const vhpContract = new Contract({
   id: wallets.vhp.address,
-  abi: utils.tokenAbi,
+  abi: abiVhp,
   bytecode: new Uint8Array(fs.readFileSync(path.join(wasmDir, "vhp.wasm"))),
   provider: wallets.vhp.provider,
   signer: wallets.vhp,
