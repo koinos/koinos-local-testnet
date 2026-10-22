@@ -7,11 +7,11 @@ export const abiBytestorage = {
       "entry_point": 3055330172,
       "read_only": true
     },
-    "set_bytecode": {
+    "save_bytecode": {
       "argument": "bytestorage.bytecode",
       "return": "",
-      "description": "Set bytecode",
-      "entry_point": 406256488,
+      "description": "Save bytecode",
+      "entry_point": 3155075740,
       "read_only": false
     }
   },

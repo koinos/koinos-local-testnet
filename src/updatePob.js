@@ -1,37 +1,47 @@
+import fs from "fs";
+import path from "path";
 import { wallets } from "./wallets.js";
 import { contracts } from "./contracts.js";
-import { Transaction } from "koilib";
+import { Transaction, utils } from "koilib";
+
+const currentDir = path.dirname(new URL(import.meta.url).pathname);
+const wasmDir = path.join(currentDir, "wasm");
 
 const proposer = wallets.random();
-const FEE_PROPOSAL = "1000000000";
+const FEE_PROPOSAL = "10000000000";
 
 async function storeNewBytecodePob() {
   const transaction = new Transaction({
     signer: proposer,
     provider: proposer.provider,
   });
-  await transaction.pushOperation(contracts.bytestorage.functions.set_bytecode, {
+  await transaction.pushOperation(contracts.bytestorage.functions.save_bytecode, {
     name: "pob2",
-    bytecode: contracts.pob.bytecode,
+    bytecode: utils.encodeBase64url(
+      new Uint8Array(fs.readFileSync(path.join(wasmDir, "pob2.wasm")))
+    ),
     abi: JSON.stringify(contracts.pob.abi),
   });
   await transaction.prepare({
-    rcLimit: 3e6,
+    rcLimit: 10e8-1,
     payer: wallets.freemanasharer.address,
+    payee: proposer.address,
   });
-  await transaction.sign();
   await transaction.send();
   await transaction.wait();
   console.log("New bytecode stored for pob2 contract\n");
 }
 
 async function generateProposalUpdatePob() {
-  const tx = new Transaction();
+  const tx = new Transaction({
+    signer: proposer,
+    provider: proposer.provider,
+  });
   await tx.pushOperation(contracts.bytelauncher.functions.upload_contract, {
     bytecode_name: "pob2",
     contract_id: contracts.pob.getId(),
   });
-  await tx.prepare();
+  await tx.prepare({ payer: proposer.address });
   const operationMerkleRoot = tx.transaction.header.operation_merkle_root;
   const proposalId = `0x${Buffer.from(operationMerkleRoot, "base64").toString("hex")}`;
   return {
@@ -49,10 +59,18 @@ async function submitProposalUpdatePob() {
     signer: proposer,
     provider: proposer.provider,
     options: {
-      rcLimit: 3e6,
-      payer: wallets.freemanasharer.address
+      rcLimit: 10e8-1,
+      payee: proposer.address,
     },
   });
+
+  // allow governance to burn FEE
+  await txSubmit.pushOperation(contracts.koin.functions.approve, {
+    owner: proposer.address,
+    spender: wallets.governance.address,
+    value: FEE_PROPOSAL,
+  });
+
   await txSubmit.pushOperation(contracts.governance.functions.submit_proposal, {
     operations,
     operation_merkle_root: operationMerkleRoot,
@@ -71,19 +89,21 @@ async function transferKoinToProposer() {
     signer: wallets.genesis,
     provider: wallets.genesis.provider,
     options: {
-      rcLimit: 3e6,
-      payer: wallets.freemanasharer.address
+      rcLimit: 10e8-1,
+      payer: wallets.freemanasharer.address,
+      payee: wallets.genesis.address
     },
   });
 
+  const value = (BigInt(FEE_PROPOSAL) * 10n).toString();
   await transaction.pushOperation(contracts.koin.functions.transfer, {
     from: wallets.genesis.address,
     to: proposer.address,
-    value: FEE_PROPOSAL,
+    value,
   });
   await transaction.send();
   await transaction.wait();
-  console.log(`${FEE_PROPOSAL} koin transferred to proposer account\n`);
+  console.log(`${value} koin transferred to proposer account ${proposer.address}\n`);
 }
 
 async function main() {
