@@ -8,6 +8,8 @@ import { abiGovernance } from "./abi/governance.js";
 import { abiNameService } from "./abi/name_service.js";
 import { abiFund } from "./abi/fund.js";
 import { abiFreemanasharer } from "./abi/freemanasharer.js";
+import { abiBytelauncher } from "./abi/bytelauncher.js";
+import { abiBytestorage } from "./abi/bytestorage.js";
 
 delete utils.tokenAbi.koilib_types.nested.koinos.nested.btype;
 const currentDir = path.dirname(new URL(import.meta.url).pathname);
@@ -94,6 +96,22 @@ const freemanasharerContract = new Contract({
   signer: wallets.freemanasharer,
 });
 
+const bytelauncherContract = new Contract({
+  id: wallets.bytelauncher.address,
+  abi: abiBytelauncher,
+  bytecode: new Uint8Array(fs.readFileSync(path.join(wasmDir, "bytelauncher.wasm"))),
+  provider: wallets.bytelauncher.provider,
+  signer: wallets.bytelauncher,
+});
+
+const bytestorageContract = new Contract({
+  id: wallets.bytestorage.address,
+  abi: abiBytestorage,
+  bytecode: new Uint8Array(fs.readFileSync(path.join(wasmDir, "bytestorage.wasm"))),
+  provider: wallets.bytestorage.provider,
+  signer: wallets.bytestorage,
+});
+
 export const contracts = {
   koin: koinContract,
   vhp: vhpContract,
@@ -104,4 +122,6 @@ export const contracts = {
   fund: fundContract,
   freemanasharer: freemanasharerContract,
   getContractMetadata: getContractMetadataContract,
+  bytelauncher: bytelauncherContract,
+  bytestorage: bytestorageContract,
 };

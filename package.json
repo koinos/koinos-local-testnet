@@ -6,8 +6,11 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "bootstrap": "node src/index.js"
+    "bootstrap": "node src/index.js",
+    "update-pob:generate": "node src/updatePob.js generate",
+    "update-pob:submit": "node src/updatePob.js submit"
   },
+
   "repository": {
     "type": "git",
     "url": "git+https://github.com/koinos/koinos-local-testnet.git"

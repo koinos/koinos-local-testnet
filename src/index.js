@@ -32,6 +32,8 @@ async function setSystemContracts() {
     "koin",
     "getContractMetadata",
     "fund",
+    "bytelauncher",
+    // "bytestorage", // bytestorage is not a system contract in mainnet
   ]
 
   const transaction = new Transaction({

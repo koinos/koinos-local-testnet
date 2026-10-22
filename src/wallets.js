@@ -12,6 +12,8 @@ const GOVERNANCE_PRIVATE_KEY = "KyzyNMMAvWiCMxsxfZbVjuhHhZT6Z3iBhB6NWN9VHPqB6hGp
 const GET_CONTRACT_METADATA_PRIVATE_KEY = "L163ee4Y5NR7qkmG9hQ1kch5jizwdgbJ2LGor4Yu9NYUKied4maw";
 const FUND_PRIVATE_KEY = "L24uDACpTzaXeQfN73xV4TcabyxsNpR8R4miXSeLnMnoZnmfw5ax";
 const FREEMANASHARER_PRIVATE_KEY = "L1TgxVxvEPx52iZxPwApCKdxUV66NWq5ZfeFzDF5ySyrXb2YJe52";
+const BYTELAUNCHER_PRIVATE_KEY = "L2fXNQZ51sEYeoiSoVwEwoVCjCVkS4rdkHBURyHy3b2MbARBTLr7";
+const BYTESTORAGE_PRIVATE_KEY = "5KgbTrezcxuCHreaHiBLS1T9uR75QHez9reCPJBBsAjaTHVNn5k";
 
 const provider = new Provider(JSONRPC_ENDPOINT);
 
@@ -45,6 +47,12 @@ fundSigner.provider = provider;
 const freemanasharerSigner = Signer.fromWif(FREEMANASHARER_PRIVATE_KEY);
 freemanasharerSigner.provider = provider;
 
+const bytelauncherSigner = Signer.fromWif(BYTELAUNCHER_PRIVATE_KEY);
+bytelauncherSigner.provider = provider;
+
+const bytestorageSigner = Signer.fromWif(BYTESTORAGE_PRIVATE_KEY);
+bytestorageSigner.provider = provider;
+
 function randomSigner() {
   const signer = new Signer({ privateKey: crypto.randomBytes(32).toString("hex") });
   signer.provider = provider;
@@ -62,6 +70,8 @@ export const wallets = {
   governance: governanceSigner,
   fund: fundSigner,
   freemanasharer: freemanasharerSigner,
+  bytelauncher: bytelauncherSigner,
+  bytestorage: bytestorageSigner,
   random: randomSigner,
 }
 
