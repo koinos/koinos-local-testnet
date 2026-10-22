@@ -23,6 +23,6 @@
   "homepage": "https://github.com/koinos/koinos-local-testnet#readme",
   "dependencies": {
     "dotenv": "^17.2.3",
-    "koilib": "^9.1.0"
+    "koilib": "^9.4.1"
   }
 }
